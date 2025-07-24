@@ -16,8 +16,8 @@ async function bootstrap() {
   app.setGlobalPrefix('api')
   await app.register(helmet, {
     contentSecurityPolicy: false,
-    crossOriginEmbedderPolicy: false,
-    crossOriginOpenerPolicy: false
+    crossOriginOpenerPolicy: false,
+    crossOriginResourcePolicy: false
   })
   const configService = app.get(ConfigService)
   const port = configService.get<string>('PORT', '3000')
