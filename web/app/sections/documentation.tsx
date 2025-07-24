@@ -40,13 +40,25 @@ export async function Documentation({
 
         <div className='max-w-6xl mx-auto'>
           <Tabs defaultValue='getting-started' className='w-full'>
-            <TabsList className='grid w-full grid-cols-6'>
-              <TabsTrigger value='getting-started'>Getting Started</TabsTrigger>
-              <TabsTrigger value='characters'>Characters</TabsTrigger>
-              <TabsTrigger value='episodes'>Episodes</TabsTrigger>
-              <TabsTrigger value='locations'>Locations</TabsTrigger>
-              <TabsTrigger value='pagination'>Pagination</TabsTrigger>
-              <TabsTrigger value='images'>Images</TabsTrigger>
+            <TabsList className='flex flex-wrap justify-evenly gap-2 w-full h-auto p-2'>
+              <TabsTrigger value='getting-started' className='flex-1'>
+                Getting Started
+              </TabsTrigger>
+              <TabsTrigger value='characters' className='flex-1'>
+                Characters
+              </TabsTrigger>
+              <TabsTrigger value='episodes' className='flex-1'>
+                Episodes
+              </TabsTrigger>
+              <TabsTrigger value='locations' className='flex-1'>
+                Locations
+              </TabsTrigger>
+              <TabsTrigger value='pagination' className='flex-1'>
+                Pagination
+              </TabsTrigger>
+              <TabsTrigger value='images' className='flex-1'>
+                Images
+              </TabsTrigger>
             </TabsList>
 
             <TabsContent value='getting-started' className='space-y-6'>
