@@ -10,14 +10,18 @@ async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(AppModule, new FastifyAdapter())
 
   app.enableCors({
-    origin: '*'
+    origin: '*',
+    preflightContinue: false,
+    optionsSuccessStatus: 200,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
   })
   app.useGlobalPipes(new ValidationPipe({ transform: true }))
   app.setGlobalPrefix('api')
   await app.register(helmet, {
     contentSecurityPolicy: false,
-    crossOriginOpenerPolicy: false,
-    crossOriginResourcePolicy: false
+    crossOriginResourcePolicy: false,
+    crossOriginOpenerPolicy: false
   })
   const configService = app.get(ConfigService)
   const port = configService.get<string>('PORT', '3000')
