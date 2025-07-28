@@ -7,6 +7,7 @@ import { getCharacters } from '@/services/characters'
 import { getEpisodes } from '@/services/episodes'
 import { getLocations } from '@/services/locations'
 import { PopularCharacters } from '@/sections/popular-characters'
+import { ScrollTracker } from '@/components/scroll-tracker'
 
 export default async function Home() {
   const [[charactersError, characters], [episodesError, episodes], [locationsError, locations]] = await Promise.all([
@@ -28,13 +29,15 @@ export default async function Home() {
   }
 
   return (
-    <div className='bg-sky-50 divide-y'>
-      <Header />
-      <Hero />
-      <ApiOverview characters={characters} episodes={episodes} locations={locations} />
-      <Documentation characters={characters} episodes={episodes} locations={locations} />
-      <PopularCharacters characters={characters} />
-      <Footer />
-    </div>
+    <ScrollTracker thresholds={[25, 50, 75, 100]} debounceMs={500}>
+      <div className='bg-sky-50 divide-y'>
+        <Header />
+        <Hero />
+        <ApiOverview characters={characters} episodes={episodes} locations={locations} />
+        <Documentation characters={characters} episodes={episodes} locations={locations} />
+        <PopularCharacters characters={characters} />
+        <Footer />
+      </div>
+    </ScrollTracker>
   )
 }

@@ -1,8 +1,10 @@
 'use client'
 
 import { Copy, ExternalLink, Check } from 'lucide-react'
+import { useCopyToClipboard } from '@uidotdev/usehooks'
+
 import { Button } from '@/app/components/ui/button'
-import { useUrlActions } from '@/hooks/use-url-actions'
+import { openInNewTab } from '@/utils/open-in-new-tab'
 
 interface ApiUrlDisplayProps {
   url: string
@@ -10,7 +12,7 @@ interface ApiUrlDisplayProps {
 }
 
 export function ApiUrlDisplay({ url, showButtons = true }: ApiUrlDisplayProps) {
-  const { copied, copyToClipboard, openInNewTab } = useUrlActions(url)
+  const [copiedText, copyToClipboard] = useCopyToClipboard()
 
   return (
     <div className='bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto'>
@@ -23,16 +25,16 @@ export function ApiUrlDisplay({ url, showButtons = true }: ApiUrlDisplayProps) {
             <Button
               size='sm'
               variant='ghost'
-              onClick={copyToClipboard}
+              onClick={() => copyToClipboard(url)}
               className='text-gray-300 hover:text-white hover:bg-gray-700'
               title='Copy URL'
             >
-              {copied ? <Check className='h-4 w-4' /> : <Copy className='h-4 w-4' />}
+              {copiedText ? <Check className='h-4 w-4' /> : <Copy className='h-4 w-4' />}
             </Button>
             <Button
               size='sm'
               variant='ghost'
-              onClick={openInNewTab}
+              onClick={() => openInNewTab(url)}
               className='text-gray-300 hover:text-white hover:bg-gray-700'
               title='Open in new tab'
             >
