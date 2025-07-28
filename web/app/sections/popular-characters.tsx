@@ -17,18 +17,20 @@ export function PopularCharacters({ characters }: { characters: CharacterPaginat
 
         <div className='grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto'>
           {characters.results.map(({ id, name, portrait_path, age, status, phrases, occupation }) => (
-            <Link
-              href={`${baseUrl}/characters/${id}`}
+            <Card
               key={id}
-              target='_blank'
-              data-umami-event='Popular Characters character'
-              data-umami-event-name={name}
-              prefetch={false}
+              className='text-center transition-all duration-300 group cursor-pointer hover:scale-105 hover:shadow-xl hover:shadow-yellow-200 hover:border-yellow-400 hover:bg-yellow-50'
             >
-              <Card key={id} className='text-center'>
+              <Link
+                href={`${baseUrl}/characters/${id}`}
+                target='_blank'
+                data-umami-event='Popular Characters character'
+                data-umami-event-name={name}
+                prefetch={false}
+              >
                 <CardHeader className='pb-2'>
                   <div className='mx-auto mb-4 relative'>
-                    <div className='w-32 h-32 mx-auto rounded-lg overflow-hidden shadow-lg'>
+                    <div className='w-32 h-32 mx-auto rounded-lg overflow-hidden shadow-lg transition-all duration-300 group-hover:shadow-yellow-300 group-hover:scale-110 group-hover:rotate-2'>
                       <Image
                         src={`https://cdn.thesimpsonsapi.com/500${portrait_path}`}
                         alt={name}
@@ -38,10 +40,10 @@ export function PopularCharacters({ characters }: { characters: CharacterPaginat
                       />
                     </div>
                   </div>
-                  <CardTitle className='text-lg font-bold text-ellipsis overflow-hidden whitespace-nowrap'>
+                  <CardTitle className='text-lg font-bold text-ellipsis overflow-hidden whitespace-nowrap transition-colors duration-300 group-hover:text-yellow-700'>
                     {name}
                   </CardTitle>
-                  <CardDescription className='text-sm text-gray-600 min-h-[2.5rem] flex items-center justify-center line-clamp-2'>
+                  <CardDescription className='text-sm text-gray-600 min-h-[2.5rem] flex items-center justify-center line-clamp-2 transition-colors duration-300 group-hover:text-yellow-600'>
                     {occupation}
                   </CardDescription>
                 </CardHeader>
@@ -63,11 +65,13 @@ export function PopularCharacters({ characters }: { characters: CharacterPaginat
                     )}
                   </div>
                   {phrases.length > 0 && (
-                    <div className='text-xs text-gray-500 italic'>"{phrases.find((phrase) => phrase.length < 50)}"</div>
+                    <div className='text-xs text-gray-500 italic transition-all duration-300 group-hover:text-yellow-600 group-hover:font-medium'>
+                      "{phrases.find((phrase) => phrase.length < 50)}"
+                    </div>
                   )}
                 </CardContent>
-              </Card>
-            </Link>
+              </Link>
+            </Card>
           ))}
         </div>
       </div>
